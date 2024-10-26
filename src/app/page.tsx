@@ -5,14 +5,6 @@ import LogTable from '../components/LogTable';
 import LogHistogram from '../components/LogHistogram';
 import { LogRecord } from '../types/log';
 
-interface ScopeLog {
-  logRecords: LogRecord[];
-}
-
-interface ResourceLog {
-  scopeLogs: ScopeLog[];
-}
-
 const fetchLogs = async (): Promise<LogRecord[]> => {
   const response = await fetch('https://take-home-assignment-otlp-logs-api.vercel.app/api/logs', {
     cache: 'no-store',
@@ -22,8 +14,8 @@ const fetchLogs = async (): Promise<LogRecord[]> => {
   }
   const data = await response.json();
 
-  const logs: LogRecord[] = data.resourceLogs.flatMap((resourceLog: ResourceLog) =>
-    resourceLog.scopeLogs.flatMap((scopeLog: ScopeLog) => scopeLog.logRecords)
+  const logs: LogRecord[] = data.resourceLogs.flatMap((resourceLog: any) =>
+    resourceLog.scopeLogs.flatMap((scopeLog: any) => scopeLog.logRecords)
   );
 
   return logs;
