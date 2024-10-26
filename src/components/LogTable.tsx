@@ -1,20 +1,11 @@
 // src/components/LogTable.tsx
 'use client'
 import React, { useState } from 'react';
+import { LogRecord } from '@/types/log';
 
-interface Log {
-  timeUnixNano: string;
-  observedTimeUnixNano: string;
-  severityNumber: number;
-  severityText: string;
-  body: {
-    stringValue: string;
-  };
-  attributes: Array<{ key: string; value: string }>;
-}
 
 interface LogTableProps {
-  logs: Log[];
+  logs: LogRecord[] ;
 }
 
 const LogTable: React.FC<LogTableProps> = ({ logs }) => {
@@ -54,7 +45,7 @@ const LogTable: React.FC<LogTableProps> = ({ logs }) => {
                     <ul>
                       {log.attributes.map((attr, idx) => (
                         <li key={idx}>
-                          {attr.key}: {attr.value}
+                          {attr.key}: 
                         </li>
                       ))}
                     </ul>
